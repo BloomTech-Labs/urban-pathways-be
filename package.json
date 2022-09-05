@@ -1,0 +1,89 @@
+{
+  "name": "labs-api-starter",
+  "version": "1.0.0",
+  "private": false,
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "repository": "github:Lambda-School-Labs/labs-api-starter",
+  "scripts": {
+    "start": "node server.js",
+    "watch:dev": "nodemon",
+    "lint": "npx eslint .",
+    "lint:fix": "npx eslint --fix .",
+    "format": "npx prettier --write \"**/*.+(js|jsx|json|yml|yaml|css|md)\"",
+    "knex": "npx knex --knexfile config/knexfile.js",
+    "tests": "npx jest",
+    "coverage": "CI=true npx jest --coverage --detectOpenHandles --forceExit"
+  },
+  "lint-staged": {
+    "api/**/*.js": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "/__tests__/",
+      "/vendor/",
+      "/coverage/"
+    ],
+    "collectCoverageFrom": [
+      "**/*.js"
+    ]
+  },
+  "nodemonConfig": {
+    "exec": "npm run start",
+    "watch": [
+      "api/*",
+      "public/*"
+    ],
+    "ignore": [
+      "**/__tests__/**",
+      "*.test.js",
+      "*.spec.js"
+    ]
+  },
+  "dependencies": {
+    "@okta/jwt-verifier": "^2.3.0",
+    "axios": "^0.26.0",
+    "cookie-parser": "~1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "~4.17.3",
+    "helmet": "^5.0.2",
+    "http-errors": "~2.0.0",
+    "jwks-rsa": "^2.0.5",
+    "knex": "^1.0.3",
+    "morgan": "~1.10.0",
+    "pg": "^8.7.3",
+    "swagger-jsdoc": "^6.1.0",
+    "swagger-ui-express": "^4.3.0"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^6.1.1",
+    "cross-env": "^7.0.3",
+    "debug": "~4.3.3",
+    "eslint": "^8.10.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-jest": "^26.1.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "husky": "^7.0.4",
+    "jest": "^27.5.1",
+    "lint-staged": "^12.3.4",
+    "nodemon": "^2.0.15",
+    "prettier": "^2.5.1",
+    "supertest": "^6.2.2"
+  }
+}
