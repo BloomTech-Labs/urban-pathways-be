@@ -1,16 +1,7 @@
-const express = require('express');
-const GetStarted = require('./gettingStartedModel');
-const router = express.Router();
+const db = require('../../data/db-config');
 
-router.get('/', function (req, res) {
-  GetStarted.getSecret()
-    .then((response) => {
-      res.status(200).json(response[0].secret);
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json({ message: err.message });
-    });
-});
+const getSecret = () => {
+  return db('getting_started');
+};
 
-module.exports = router;
+module.exports = { getSecret };
