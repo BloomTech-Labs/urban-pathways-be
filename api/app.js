@@ -1,5 +1,6 @@
 const createError = require('http-errors');
 const express = require('express');
+const fileUpload = require('express-fileupload')
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
@@ -58,6 +59,8 @@ app.use('/getting_started', gettingStartedRouter);
 app.use(function (req, res, next) {
   next(createError(404));
 });
+
+app.use(fileUpload());
 
 // error handler
 app.use(function (err, req, res, next) {
