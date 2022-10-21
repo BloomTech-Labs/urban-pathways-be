@@ -1,6 +1,7 @@
 const createError = require('http-errors');
 const express = require('express');
-const fileUpload = require('express-fileupload')
+const fileUpload = require('express-fileupload');
+const multer = require('multer'); // added for memory storage -> S3
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
