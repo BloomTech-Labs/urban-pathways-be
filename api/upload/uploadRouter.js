@@ -27,8 +27,6 @@ const s3 = new S3Client({
 const storage = multer.memoryStorage()
 const upload = multer({ storage: storage})
 
-
-
 // router.get('/posts', async (req, res) => {
 //   const files = await --> insert model <--
 
@@ -44,7 +42,7 @@ const upload = multer({ storage: storage})
 //   }
 // })
 
-router.post('/upload', upload.single('image'), async (req, res) => {
+router.post('/getSignedURL', upload.single('image'), async (req, res) => {
     req.file.buffer
 
     const fileName = randomFileName()
@@ -52,6 +50,7 @@ router.post('/upload', upload.single('image'), async (req, res) => {
     const params = {
       Bucket: bucketName,
       Key: fileName,
+      Expires: 500,
       Body: req.file.buffer,
       ContentType: req.file.mimetype,
     }
@@ -68,10 +67,13 @@ router.post('/upload', upload.single('image'), async (req, res) => {
         url: `https://${bucketName}.s3.amazonaws.com/${fileName}`,
       }
       res.json(returnData)
-    })
+    }) //time stamp
+  }); 
+  
+  // await db.insert({fileName: fileName, fileTitle: req.body.title, s3URL: req.file.url}).into('files') -- move to another end point
 
-    await db.insert({fileName: fileName, fileTitle: req.body.title, s3URL: req.file.url}).into('files')
-  });
+  //test with html + script
+  //
 
   // router.delete('/posts/:id', async (req, res) => {
   //   
