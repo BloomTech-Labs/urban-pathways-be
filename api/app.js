@@ -1,5 +1,7 @@
 const createError = require('http-errors');
 const express = require('express');
+const fileUpload = require('express-fileupload');
+const multer = require('multer'); // added for memory storage -> S3
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
@@ -23,7 +25,7 @@ const indexRouter = require('./index/indexRouter');
 const profileRouter = require('./profile/profileRouter');
 const dsRouter = require('./dsService/dsRouter');
 const gettingStartedRouter = require('./getting_started/gettingStartedRouter');
-
+const uploadRouter = require('./upload/uploadRouter');
 const app = express();
 
 process.on('unhandledRejection', (reason, p) => {
@@ -53,11 +55,14 @@ app.use('/', indexRouter);
 app.use(['/profile', '/profiles'], profileRouter);
 app.use('/data', dsRouter);
 app.use('/getting_started', gettingStartedRouter);
+app.use('/report', uploadRouter)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
 });
+
+app.use(fileUpload());
 
 // error handler
 app.use(function (err, req, res, next) {

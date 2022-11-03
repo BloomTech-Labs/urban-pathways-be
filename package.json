@@ -53,17 +53,21 @@
     ]
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.193.0",
+    "@aws-sdk/s3-request-presigner": "^3.193.0",
     "@okta/jwt-verifier": "^2.3.0",
     "axios": "^0.26.0",
     "cookie-parser": "~1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "express": "~4.17.3",
+    "express-fileupload": "^1.4.0",
     "helmet": "^5.0.2",
     "http-errors": "~2.0.0",
     "jwks-rsa": "^2.0.5",
     "knex": "^1.0.3",
     "morgan": "~1.10.0",
+    "multer": "^1.4.5-lts.1",
     "pg": "^8.7.3",
     "swagger-jsdoc": "^6.1.0",
     "swagger-ui-express": "^4.3.0"
