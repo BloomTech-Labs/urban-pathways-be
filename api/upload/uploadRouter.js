@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../../data/db-config')
+// const db = require('../../data/db-config')
 const multer = require('multer')
 const crypto = require('crypto')
 
@@ -42,8 +42,7 @@ const upload = multer({ storage: storage})
 //   }
 // })
 
-router.post('/getSignedURL', upload.single('image'), async (req, res) => {
-    req.file.buffer
+router.get('/getSignedURL', upload.single('image'), async (req, res) => {
 
     const fileName = randomFileName()
 
@@ -51,14 +50,9 @@ router.post('/getSignedURL', upload.single('image'), async (req, res) => {
       Bucket: bucketName,
       Key: fileName,
       Expires: 500,
-      Body: req.file.buffer,
-      ContentType: req.file.mimetype,
     }
 
-    const command = new PutObjectCommand(params)
-    await s3.send(command)
-
-    s3.getSignedUrl(command, (err, data) => {
+    s3.getSignedUrl((err, data) => {
       if (err){
         res.json({success: false, error: err})
       }
