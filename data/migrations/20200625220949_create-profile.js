@@ -12,4 +12,8 @@ exports.up = (knex) => {
 
 exports.down = (knex) => {
   return knex.schema.dropTableIfExists('profiles');
+  
 };
+
+
+
