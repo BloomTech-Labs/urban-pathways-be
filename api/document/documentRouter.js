@@ -1,5 +1,4 @@
 const express = require('express');
-const authRequired = require('../middleware/authRequired');
 const DocumentUpload = require('./documentModel')
 const router = express.Router();
 

@@ -12,9 +12,3 @@ const createDocument = async (document) => {
 
 module.exports = { findAll, createDocument };
 
-
-
-module.exports = {
-    createDocument,
-    findAll
-  };
